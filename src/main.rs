@@ -1,5 +1,6 @@
 use core_affinity::*;
 use std::thread;
+use thread_priority::*;
 use std::sync::mpsc::{Sender, Receiver, TryRecvError};
 use std::sync::mpsc;
 use tokio::prelude::*;
@@ -41,7 +42,12 @@ fn main() {
     let handles = threads_info.into_iter().map(|info| {
         thread::spawn(move || {
             core_affinity::set_for_current(info.0);
-            calibrate(info)
+
+            // println!("thread id {}", thread_native_id());
+            match set_current_thread_priority(ThreadPriority::Min) {
+                Err(why) => panic!("{:?}", why),
+                Ok(_) => calibrate(info),
+            }
         })
     }).collect::<Vec<_>>();
 
