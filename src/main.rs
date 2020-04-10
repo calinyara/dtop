@@ -1,3 +1,11 @@
+/*
+ * SYSLOAD: a tool for measuring system load
+ *
+ * SPDX-License-Identifier: GPL-2.0
+ *
+ * Author: Calinyara <mr.dengjie@gmail.com>
+ */
+ 
 use core_affinity::*;
 use std::thread;
 use thread_priority::*;
