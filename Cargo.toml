@@ -1,6 +1,6 @@
 [package]
 name = "sysload"
-version = "1.0.12"
+version = "1.0.14"
 authors = ["Calinyara <mr.dengjie@gmail.com>"]
 edition = "2018"
 
