@@ -1,6 +1,6 @@
 [package]
-name = "sysload"
-version = "1.0.14"
+name = "dtop"
+version = "1.0.15"
 authors = ["Calinyara <mr.dengjie@gmail.com>"]
 edition = "2018"
 

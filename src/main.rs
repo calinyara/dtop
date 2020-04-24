@@ -22,7 +22,7 @@ static CALIBRATE_SECS: i32 = 1;
 
 fn main() {
 
-    let matches = App::new("sysload")
+    let matches = App::new("dtop")
         .version(VERSION)
         .about("Evaluate The System Load!")
         .author("Author: Calinyara <mr.dengjie@gmail.com>")
@@ -42,10 +42,6 @@ fn main() {
         tx_chs.push((channels[i].0).clone());
     }
 
-    /*
-     * Start a thread on each physical core and do scores statistics
-     * info: (CoreId, (Sender<i32>, Receiver<i32>))
-     */
     let threads_info: Vec<_> = core_ids.into_iter().zip(channels.into_iter()).collect();
     let handles = threads_info.into_iter().map(|info| {
         thread::spawn(move || {
@@ -59,9 +55,6 @@ fn main() {
         })
     }).collect::<Vec<_>>();
 
-    /*
-     * Notify the calibration threads after CALIBRATE_SECS secords
-     */
     let when = Instant::now() + Duration::from_secs(CALIBRATE_SECS as u64);
     let task = Delay::new(when)
         .and_then(|_| {
@@ -75,9 +68,6 @@ fn main() {
 
     tokio::run(task);
 
-    /*
-     * System Scores Statistics
-     */
     let mut scores = vec![];
     for handle in handles.into_iter() {
         let score = handle.join().unwrap();
@@ -101,7 +91,7 @@ fn main() {
             Ok(_) => {
                 let total_score: f64 = scores.iter().sum::<u32>() as f64;
                 let calibration_scores: f64 = get_calibration() as f64;
-                let sysload: f64 =  (calibration_scores - total_score) /  calibration_scores * 1000.;
+                let sysload: f64 =  (calibration_scores - total_score) /  calibration_scores * 100.;
                 println!("System Load {:.3}%, Total Score: {}", sysload, total_score);
             }
         }
