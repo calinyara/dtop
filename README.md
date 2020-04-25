@@ -34,9 +34,7 @@ dtop -i 5	// Check the system utilization every 5s.
 
 ```
 dtop -c		// Calibrate the system.
-
 	... 	// Run an application on the system.
-
 dtop -s		// Check the system utilization caused by the application.
 ```
 
