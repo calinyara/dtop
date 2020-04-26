@@ -10,9 +10,11 @@ cargo build --release
 **Usage**
 
 **Calibrate the system**
+
+```
 dtop -c		// Calibrate the system with interval 1s.
 dtop -c -i 5	// Calibrate the system with interval 5s.
-
+```
 
 **Measure system utilization of an application every 1s**
 
