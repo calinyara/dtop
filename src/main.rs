@@ -136,12 +136,12 @@ fn main() {
                         println!("Scores per CPU: {:?}", scores);
                         match parameter.run_mode {
                             RunMode::AppUtilization => {
-                                let sysload: f64 =  (calibration_scores - total_score as f64) /  calibration_scores * 100.;
-                                println!("System Load {:.3}%, Total Score: {}\n", sysload, total_score);
+                                let rate = (calibration_scores - total_score as f64) /  calibration_scores * 100.;
+                                println!("Total Score: {}        System Utilization: {:7.3}%\n", total_score, rate);
                             },
                             RunMode::SysPerformance => {
                                 let rate = total_score as f64 / calibration_scores * 100.;
-                                println!("System Load {:.3}%, Total Score: {}\n", rate, total_score);
+                                println!("Total Score: {}        Performance Percentage: {:9.3}%\n", total_score, rate);
                             },
                         }
                     }
