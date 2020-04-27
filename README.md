@@ -42,6 +42,7 @@ dtop -s		// Check the system utilization caused by the application.
 
 **Measure a system performance**
 ```
-dtop -c 	// Run this on a reference system, get the scores.txt.
-	...	// Copy the scores.txt to the system being measured.
-dtop		// Check the measuring system perforance with the reference system.
+dtop -m 1	// Check the measuring system perforance.
+```
+
+The score represents the residual system performance. It represents the whole system performance if there is no workloads running on the sytem. Performance scores of different systems can be compared with each other. A higher score means a better performance.
